@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ürün Detay - SGLAM Clone</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">S<span>GLAM</span></div>
+    <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="sepet.html">Sepet (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<main>
+    <div id="product-detail" class="product-detail"></div>
+</main>
+
+<footer>
+    <p>&copy; <span id="year"></span> SGLAM Clone</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+if(typeof renderProductDetail==='function') renderProductDetail();
+if(typeof updateCartCount==='function') updateCartCount();
+</script>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Glamory • Kozmetik & Parfüm</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- favicon -->
+  <link rel="icon" href="images/logo.png" type="image/png" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#"><img src="images/logo.png" alt="Glamory Logo" class="logo-img"></a>
+
+      <nav class="nav" aria-label="Ana menü">
+        <a href="#home">Anasayfa</a>
+        <a href="#products">Ürünler</a>
+        <a href="#blog">Blog</a>
+        <a href="#about">Hakkımızda</a>
+        <a href="#contact">İletişim</a>
+      </nav>
+
+      <div class="controls">
+        <button id="themeToggle" class="btn icon">🌓</button>
+        <div class="search-wrapper">
+          <input id="searchInput" placeholder="Ürün ara..." autocomplete="off">
+          <div id="searchSuggest" class="suggestions" hidden></div>
+        </div>
+        <button id="wishlistBtn" class="btn icon">♡ <span id="wishCount">0</span></button>
+        <button id="profileBtn" class="btn icon">👤</button>
+        <button id="cartBtn" class="btn cart">🛍 <span id="cartCount">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-inner container">
+      <div class="hero-left">
+        <h1>Doğal Işıltı • Güçlü Formüller</h1>
+        <p>En sevilen makyaj, cilt bakımı ve parfümler. Ücretsiz kargo 499₺ ve üstü.</p>
+        <div class="hero-ctas">
+          <a href="#products" class="btn primary">Alışverişe Başla</a>
+          <button id="openOffers" class="btn outline">Kampanyalar</button>
+        </div>
+        <ul class="feature-list">
+          <li>Dermatolojik onaylı</li>
+          <li>Doğal içerikler</li>
+          <li>30 gün iade</li>
+        </ul>
+      </div>
+      <div class="hero-right" style="background-image:url('images/chanel.jpg')">
+        <!-- görsel: chanel.jpg -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FILTERS & PRODUCTS -->
+  <section id="products" class="products container">
+    <div class="products-head">
+      <h2>Ürünler</h2>
+      <div class="controls-row">
+        <select id="categoryFilter">
+          <option value="all">Tümü</option>
+          <option value="makeup">Makyaj</option>
+          <option value="skincare">Cilt Bakımı</option>
+          <option value="perfume">Parfüm</option>
+        </select>
+
+        <select id="sortSelect">
+          <option value="featured">Öne Çıkan</option>
+          <option value="price-asc">Fiyat: Düşük → Yüksek</option>
+          <option value="price-desc">Fiyat: Yüksek → Düşük</option>
+          <option value="newest">En Yeni</option>
+        </select>
+
+        <input id="priceMin" type="number" placeholder="Min ₺" min="0">
+        <input id="priceMax" type="number" placeholder="Max ₺" min="0">
+
+        <button id="applyFilter" class="btn outline">Uygula</button>
+      </div>
+    </div>
+
+    <div id="productGrid" class="product-grid">
+      <!-- JS ile doldurulacak -->
+    </div>
+  </section>
+
+  <!-- SIDEBAR CART -->
+  <aside id="cartSidebar" class="cart-sidebar" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Sepetim</h3>
+      <button id="closeCart" class="btn icon">✕</button>
+    </div>
+    <div id="cartItems" class="cart-items"></div>
+
+    <div class="cart-footer">
+      <div class="coupon-row">
+        <input id="couponInput" placeholder="Kupon kodu">
+        <button id="applyCoupon" class="btn">Uygula</button>
+      </div>
+      <div class="shipping-row">
+        <label>Kargo: </label><select id="shippingSel">
+          <option value="standard">Standart (15₺)</option>
+          <option value="express">Express (30₺)</option>
+        </select>
+      </div>
+      <div class="total-row">
+        <div>Toplam: <span id="cartTotal">0₺</span></div>
+        <button id="checkoutBtn" class="btn primary">Ödeme</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- WISHLIST SIDEBAR -->
+  <aside id="wishSidebar" class="wish-sidebar" aria-hidden="true">
+    <div class="cart-header">
+      <h3>Favoriler</h3>
+      <button id="closeWish" class="btn icon">✕</button>
+    </div>
+    <div id="wishItems" class="cart-items"></div>
+  </aside>
+
+  <!-- PRODUCT MODAL -->
+  <div id="productModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button id="closeModal" class="btn icon close-modal">✕</button>
+      <div class="modal-body">
+        <div class="modal-imgwrap"><img id="modalImg" src="" alt=""></div>
+        <div class="modal-info">
+          <h3 id="modalTitle"></h3>
+          <div id="modalRating" class="rating"></div>
+          <p id="modalDesc"></p>
+          <div class="price-row">
+            <div id="modalPrice" class="price"></div>
+            <div id="modalOldPrice" class="old-price"></div>
+          </div>
+          <div class="qty-row">
+            <label>Adet</label>
+            <input id="modalQty" type="number" min="1" value="1">
+          </div>
+          <div class="modal-actions">
+            <button id="modalAddBtn" class="btn primary">Sepete Ekle</button>
+            <button id="modalBuyBtn" class="btn outline">Hemen Al</button>
+            <button id="modalFavBtn" class="btn icon">♡</button>
+          </div>
+
+          <div class="reviews" id="reviewsSection">
+            <h4>Yorumlar</h4>
+            <div id="reviewsList"></div>
+            <form id="reviewForm">
+              <input id="reviewName" placeholder="Adınız" required>
+              <select id="reviewStars">
+                <option value="5">5 ⭐</option>
+                <option value="4">4 ⭐</option>
+                <option value="3">3 ⭐</option>
+                <option value="2">2 ⭐</option>
+                <option value="1">1 ⭐</option>
+              </select>
+              <textarea id="reviewText" placeholder="Yorumunuz..." required></textarea>
+              <button class="btn">Yorumu Gönder</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROFILE / AUTH MODAL (basit mock) -->
+  <div id="authModal" class="modal" aria-hidden="true">
+    <div class="modal-card small">
+      <button id="closeAuth" class="btn icon close-modal">✕</button>
+      <h3>Hesabım</h3>
+      <div id="authArea">
+        <div id="notLogged">
+          <input id="authName" placeholder="Adınız">
+          <input id="authEmail" placeholder="E-posta">
+          <button id="authSignup" class="btn primary">Üye Ol / Giriş</button>
+        </div>
+        <div id="logged" hidden>
+          <p>Hoşgeldiniz, <span id="userNameShow"></span></p>
+          <button id="logoutBtn" class="btn outline">Çıkış Yap</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOG -->
+  <section id="blog" class="container blog">
+    <h2>Blog & İpuçları</h2>
+    <div class="blog-grid">
+      <article class="blog-card">
+        <h3>Cilt Bakım Rutini</h3>
+        <p>Sabah rutini: Temizle → Tonik → Serum → Nemlendirici → SPF. Akşam: Makyaj çıkar → Temizle → Tonik → Serum → Yoğun krem. Hafta 1-2 kez peeling yapın. Cildin su-yağ dengesini korumak için doğru ürün seçimi hayati!</p>
+        <a class="readmore" href="#">Devamı →</a>
+      </article>
+      <article class="blog-card">
+        <h3>Makyajda Kalıcılık Tüyoları</h3>
+        <p>Primer kullanmak temeldir — gözenekleri düzleştirir ve fondöteni tutturur. Fondöteni ince tabakalar halinde uygula. Mat bitiş istiyorsan setting powder ekle, ışıltı için glow spray. Son adım: fixing spray ile sabit et — 12 saat dayanır!</p>
+        <a class="readmore" href="#">Devamı →</a>
+      </article>
+      <article class="blog-card">
+        <h3>Göz Makyajı Teknikleri</h3>
+        <p>Göz makyajında blending en önemli unsur. Başla açık renk, orta tona geç, kapatı en koyu renk ile yapın. Eyeliner için elini sabitlemek şart. Rimel iki katlı uygula — ilk kat kurutsun, sonra bir kat daha ekle. Göz mavisi büyütmek için nude eyeliner kullan!</p>
+        <a class="readmore" href="#">Devamı →</a>
+      </article>
+      <article class="blog-card">
+        <h3>Cilt Sorunları ve Çözümleri</h3>
+        <p>Akneik cilt: Salisilik asit içeren ürünler. Kuru cilt: Hyaluronik asit + ceramideler. Yağlı cilt: Niacinamide. Hassas cilt: Centella asiatica + panthenol. Her cilt tipi farklı ihtiyaç duyar. Ürünleri 6 hafta dene, sonra sonuç görürsün.</p>
+        <a class="readmore" href="#">Devamı →</a>
+      </article>
+      <article class="blog-card">
+        <h3>Dudak Makyajı İpuçları</h3>
+        <p>Dudak konturü koyu renkle çizilir. Mat ruj için dudakları nemlendirip primer uygula. Likit rujlar dayanıklı ama kurutabilir — serum lip balm ile hafiflet. Açık renk istiyorsan iki kat uygula. Dudak hatlarını kalem ile tanımlamak profesyonel görünüm sağlar.</p>
+        <a class="readmore" href="#">Devamı →</a>
+      </article>
+      <article class="blog-card">
+        <h3>Kaş Tasarımı & Dolgu</h3>
+        <p>Kaş şekli yüz yapısına göre değişir. Kalın kaş trendy ama doğal olmayan görüntü vermemeli. Kaş kalemi doğru açıyla tutuştur. Kalın kaşları gölgelendirerek dolgu yap, açık kısmı kalemle tanımla. Fixatif spray ile günlük tutturabilirsin.</p>
+        <a class="readmore" href="#">Devamı →</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ABOUT & CONTACT -->
+  <section id="about" class="container about">
+    <h2>Hakkımızda</h2>
+    <p><span style="color:#c2185b;font-style:italic;font-weight:600">Glamory</span>; doğallık, etik üretim ve kaliteyi birleştirir.</p>
+  </section>
+
+  <section id="contact" class="container contact">
+    <h2>İletişim</h2>
+    <form id="contactForm">
+      <input id="contactName" placeholder="Adınız" required>
+      <input id="contactEmail" type="email" placeholder="E-posta" required>
+      <textarea id="contactMsg" placeholder="Mesajınız" required></textarea>
+      <button class="btn primary">Gönder</button>
+    </form>
+  </section>
+
+  <!-- WHATSAPP & SOCIAL -->
+  <a id="whatsappBtn" class="whatsapp" href="https://wa.me/905555555555" target="_blank" title="WhatsApp">💬</a>
+
+  <!-- BLOG MODAL -->
+  <div id="blogModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button id="closeBlogModal" class="btn icon close-modal">✕</button>
+      <h3 id="blogModalTitle"></h3>
+      <div id="blogModalContent" style="max-height:70vh;overflow-y:auto;"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div>© <span id="year"></span> <span style="color:#c2185b;font-style:italic;font-weight:600">Glamory</span></div>
+      <div class="payments">Visa • MasterCard • Troy</div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

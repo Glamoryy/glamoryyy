@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ürünler - SGLAM Clone</title>
+<link rel="stylesheet" href="css/style.css">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">S<span>GLAM</span></div>
+    <nav>
+        <a href="index.html">Ana Sayfa</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="sepet.html">Sepet (<span id="cart-count">0</span>)</a>
+    </nav>
+</header>
+
+<main>
+    <section class="product-filter">
+        <input id="search-input" type="text" placeholder="Ürün ara...">
+        <select id="category-filter">
+            <option value="all">Tüm Kategoriler</option>
+            <option value="makyaj">Makyaj</option>
+            <option value="cilt">Cilt Bakımı</option>
+            <option value="parfum">Parfüm</option>
+            <option value="temizlik">Temizlik</option>
+        </select>
+        <input id="max-price" type="number" placeholder="Maks Fiyat">
+        <button id="clear-filters" class="btn">Temizle</button>
+    </section>
+
+    <section>
+        <div id="product-list" class="product-grid"></div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; <span id="year"></span> SGLAM Clone</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+if(typeof initProductsPage==='function') initProductsPage();
+if(typeof updateCartCount==='function') updateCartCount();
+</script>
+</body>
+</html>
